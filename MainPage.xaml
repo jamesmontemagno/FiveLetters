@@ -1,0 +1,83 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FiveLetters.MainPage"
+             BackgroundColor="{DynamicResource SecondaryColor}"
+             xmlns:viewmodel="clr-namespace:FiveLetters.ViewModel"
+             xmlns:model="clr-namespace:FiveLetters.Model"
+             x:DataType="viewmodel:GameViewModel">
+ 
+    <Grid RowDefinitions="*, Auto"
+          Padding="8,12,8,12">
+        
+        <!--Game field-->
+        <VerticalStackLayout
+            Spacing="8"
+            BindableLayout.ItemsSource="{Binding Rows}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate x:DataType="model:WordRow">
+                    <HorizontalStackLayout 
+                        Spacing="8"
+                        HorizontalOptions="Center"
+                        BindableLayout.ItemsSource="{Binding Letters}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="model:Letter">
+                                <Frame Style="{DynamicResource LetterFrame}"
+                                        BackgroundColor="{Binding Color}">
+                                    <Label Text="{Binding Input}"
+                                           FontSize="36"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"/>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+            
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="1" Spacing="4">
+            <HorizontalStackLayout 
+                        Spacing="2"
+                        HorizontalOptions="Center"
+                        BindableLayout.ItemsSource="{Binding KeyboardRow1}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Null}">
+                        <Button Style="{DynamicResource LetterButton}"
+                                Text="{Binding .}"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=EnterLetterCommand}"
+                                CommandParameter="{Binding .}"/>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout 
+                        Spacing="2"
+                        HorizontalOptions="Center"
+                        BindableLayout.ItemsSource="{Binding KeyboardRow2}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Null}">
+                        <Button Style="{DynamicResource LetterButton}"
+                                Text="{Binding .}"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=EnterLetterCommand}"
+                                CommandParameter="{Binding .}"/>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout 
+                        Spacing="4"
+                        HorizontalOptions="Center"
+                        BindableLayout.ItemsSource="{Binding KeyboardRow3}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Null}">
+                        <Button Style="{DynamicResource LetterButton}"
+                                Text="{Binding .}"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GameViewModel}}, Path=EnterLetterCommand}"
+                                CommandParameter="{Binding .}"/>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+        <!--Keyboard-->
+    </Grid>
+</ContentPage>
